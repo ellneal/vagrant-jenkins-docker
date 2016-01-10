@@ -19,4 +19,4 @@ $ vagrant up
 
 ### Jenkins Persistence
 
-Jenkins will persist to the filesystem, which is setup as a shared folder name `jenkins_home`. You can safely destroy the virtual machine without losing and of your work inside jenkins.
+Jenkins will persist to the filesystem, which is setup as a shared folder named `jenkins_home`. You can safely destroy the virtual machine without losing any of your work inside jenkins.
