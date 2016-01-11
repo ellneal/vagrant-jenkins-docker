@@ -6,12 +6,23 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.box = "debian/jessie64"
-  config.vm.provision :shell, path: "bootstrap.sh"
+
+  dockerfiles_dir = "/var/lib/dockerfiles"
+  jenkins_dir = "/var/lib/jenkins"
+  docker_sock_path = "/var/run/docker.sock"
+
+  config.vm.provision "docker", images: ["jenkins:latest"] do |docker|
+    docker.build_image "/var/lib/dockerfiles", args: "-f #{dockerfiles_dir}/jenkins_docker -t jenkins/docker --build-arg DOCKER_GROUP_ID=$(getent group docker | cut -d: -f3)"
+    docker.run "jenkins/docker", args: "-p 8080:8080 -p 50000:50000 -v #{jenkins_dir}:#{jenkins_dir} -v #{docker_sock_path}:#{docker_sock_path} -v $(which docker):/bin/docker"
+  end
+
+  # config.vm.provision :shell, path: "bootstrap.sh"
+
   config.vm.network "forwarded_port", guest: 8080, host: 8980
 
   # create the jenkins share
-  # the jenkins user is fixed to uid=8980 during provisioning
-  config.vm.synced_folder "./jenkins_home", "/var/lib/jenkins", mount_options: ["uid=8980"]
+  config.vm.synced_folder "./jenkins_home", jenkins_dir
+  config.vm.synced_folder "./dockerfiles", dockerfiles_dir
 
   # disable the default share
   config.vm.synced_folder ".", "/vagrant", disabled: true
