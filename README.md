@@ -1,6 +1,8 @@
 # Vagrant + Jenkins + Docker
 
-This script will setup a VM that has [jenkins][jenkins] and [docker][docker] preinstalled and configured. While the VM is running jenkins will be available on localhost:8980.
+This script will setup a VM that has [docker][docker] preinstalled and configured. A [jenkins][jenkins] instance will be run in a container on startup, which has access to the docker binary for use inside jenkins scripts.
+
+While the VM is running jenkins will be available on localhost:8980.
 
 [jenkins]: https://jenkins-ci.org
 [docker]: https://www.docker.com
