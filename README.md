@@ -9,7 +9,7 @@ While the VM is running jenkins will be available on localhost:8980.
 
 ### Setup
 
-Simply clone this repository and `cd` into the directory. Make sure you have vagrant and [VirtualBox][virtualbox] installed, and the `vagrant-vbguest` plugin is available. Then run `vagrant up`.
+Simply clone this repository and `cd` into the directory. Make sure you have [vagrant][vagrant] and [VirtualBox][virtualbox] installed, and the `vagrant-vbguest` plugin is available. Then run `vagrant up`.
 
 ```bash
 $ cd path/to/repository
@@ -17,6 +17,7 @@ $ vagrant plugin install vagrant-vbguest
 $ vagrant up
 ```
 
+[vagrant]: https://www.vagrantup.com
 [virtualbox]: https://www.virtualbox.org
 
 ### Jenkins Persistence
