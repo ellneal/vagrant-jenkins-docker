@@ -5,7 +5,7 @@ ENV JENKINS_HOME /var/lib/jenkins
 
 RUN apt-get update && apt-get install -y lxc && rm -rf /var/lib/apt/lists/*
 
-ARG DOCKER_GROUP_ID=1000
+ARG DOCKER_GROUP_ID
 RUN groupadd -g ${DOCKER_GROUP_ID} docker && usermod -a -G docker jenkins
 
 USER jenkins
