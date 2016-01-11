@@ -1,13 +1,10 @@
-unless Vagrant.has_plugin?("vagrant-vbguest")
-  raise <<-eos
-  
-
-The vagrant-vbguest plugin is not installed
-Run `vagrant plugin install vagrant-vbguest` then try again
-  eos
-end
-
 Vagrant.configure(2) do |config|
+  config.vm.provider :virtualbox do
+    unless Vagrant.has_plugin?("vagrant-vbguest")
+      raise "The vagrant-vbguest plugin is not installed. Run `vagrant plugin install vagrant-vbguest` then try again."
+    end
+  end
+
   config.vm.box = "debian/jessie64"
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.network "forwarded_port", guest: 8080, host: 8980
