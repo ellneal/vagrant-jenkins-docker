@@ -16,11 +16,8 @@ Vagrant.configure(2) do |config|
     docker.run "jenkins/docker", args: "-p 8080:8080 -p 50000:50000 -v #{jenkins_dir}:#{jenkins_dir} -v #{docker_sock_path}:#{docker_sock_path} -v $(which docker):/bin/docker"
   end
 
-  # config.vm.provision :shell, path: "bootstrap.sh"
-
   config.vm.network "forwarded_port", guest: 8080, host: 8980
 
-  # create the jenkins share
   config.vm.synced_folder "./jenkins_home", jenkins_dir
   config.vm.synced_folder "./dockerfiles", dockerfiles_dir
 
